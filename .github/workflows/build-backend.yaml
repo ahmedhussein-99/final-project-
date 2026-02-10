@@ -15,7 +15,6 @@ jobs:
       - name: Build and Push
         uses: docker/build-push-action@v4
         with:
-          # تعديل المسار ليدخل جوه فولدر Backend اللي فيه الـ Dockerfile
           context: ./NTI-Final-Project-Backend/Backend 
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/nti-backend:latest
