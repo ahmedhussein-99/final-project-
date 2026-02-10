@@ -1,0 +1,17 @@
+# Database PDB - Stateful Workload Protection
+# Critical: Never allow MySQL disruption during maintenance
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:  
+  name: postgres-pdb
+  namespace: final-project
+  labels:
+    app: postgres
+    tier: database
+    pdb/final-project: "true"
+spec:
+  minAvailable: 1  # Must always have 1 PostgreSQL pod running
+  selector:
+    matchLabels:
+      app: postgres
+      tier: database

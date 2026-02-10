@@ -1,0 +1,21 @@
+name: Build Backend
+on:
+  push:
+    branches: [ "main" ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Build and Push
+        uses: docker/build-push-action@v4
+        with:
+          # تعديل المسار ليدخل جوه فولدر Backend اللي فيه الـ Dockerfile
+          context: ./NTI-Final-Project-Backend/Backend 
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/nti-backend:latest
